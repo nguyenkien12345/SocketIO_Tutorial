@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <div>
+        <h1>Home</h1>
+        <div>
+            <input type="text" id="txt" placeholder="Enter Your Name: " />
+            <button type="button" id="btnSend">Submit</button>
+        </div>
+        <h2 id="content">...</h2>
+    </div>
+
+    <!-- Ta gọi vào node_modules để lấy ra thư viện socket.io.js. Thư viện này giúp trình duyệt web có thể kết nối lên socket.io và chứa hàm on, emit để mà lắng nghe server, cũng như truyền dữ liệu lên server -->
+    <script src='/socket.io/socket.io.js'></script>
+    <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+    <script>
+        // Lập tức kết nối lên server thông qua io (socket.io bên server nó sẽ bắt được thông qua sự kiện lắng nghe io.on("connection", ()={}))
+        var socket = io("http://localhost:5000");
+
+        // Server emit (truyền dữ liệu) gì thì client on (lắng nghe và nhận dữ liệu) đó
+        socket.on("server-emit", (data) => {
+            $("#content").html(data);
+        })
+
+        $(document).ready(() => {
+            $("#btnSend").click(() => {
+                let value = $("#txt").val();
+                socket.emit("action",value);
+            })
+        })
+    </script>
+</body>
+</html>
+
+<!-- 
+    emit(): Nhận vào 2 tham số: thứ 1 là tên action, thứ 2 là truyền cái gì 
+-->
