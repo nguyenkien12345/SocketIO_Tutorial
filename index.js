@@ -5,7 +5,7 @@ const app = express();
 // Setup Views
 app.set('view engine','ejs');       // Thư viện view engine mà ta cài đặt là ejs
 app.set('views','./views');         // Thư mục chứa các file view hiển thị và đường dẫn đến folder views đó
-app.set(express.static('public'));  // Setup đường dẫn đến folder tĩnh
+app.use(express.static('public'));  // Setup đường dẫn đến folder tĩnh
 
 
 // Setup Server
