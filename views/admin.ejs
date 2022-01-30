@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Admin</title>
 </head>
 <body>
     <div>
-        <input type="text"   id="txtName"   name="txtName" placeholder="Enter Name: "/>
-        <input type="number" id="txtAge"    name="txtAge"  placeholder="Enter Age: "/>
-        <button type="button" id="btnRegister">Register</button>
+        <button type="button" id="btnChooseWinner">Choose Winner</button>
         <h2 id="txtResult" name="txtResult">Kết quả</h2>
     </div>
 
@@ -30,12 +28,9 @@
         })
 
         $(document).ready(() => {
-            $("#btnRegister").click(() => {
-                var name = $("#txtName").val();
-                var age  = $("#txtAge").val();
-                var data = {name: name, age: parseInt(age)};
+            $("#btnChooseWinner").click(() => {
                 // Truyền/phát (dữ liệu) lên server
-                socket.emit("register",data);
+                socket.emit("chooseWinner"); // Không truyền dữ liệu lên server cũng ko sao
             });
         });
     </script>
